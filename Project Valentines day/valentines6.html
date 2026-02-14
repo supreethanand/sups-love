@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supy 💕 Ramy</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff9ec4, #ffc1e3);
+  overflow-x: hidden;
+  color: white;
+  text-align: center;
+}
+
+/* ENTRY SCREEN */
+#entry {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+#entry h1 {
+  font-size: 24px;
+  opacity: 0;
+  animation: fadeIn 3s forwards;
+}
+
+#enterBtn {
+  margin-top: 30px;
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  background: #ff4da6;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 20px #ff4da6;
+  transition: 0.3s;
+}
+
+#enterBtn:hover {
+  transform: scale(1.1);
+}
+
+/* MAIN CONTENT */
+.container {
+  margin-top: 30px;
+  opacity: 0;
+  transition: opacity 2s ease;
+  padding-bottom: 50px;
+}
+
+.topNames {
+  font-size: 28px;
+  text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+p {
+  font-size: 14px;
+  padding: 0 15px;
+}
+
+#counter {
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+/* SINGLE IMAGE STYLE */
+.mainImage {
+  margin-top: 20px;
+}
+
+.mainImage img {
+  width: 85%;
+  max-width: 350px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(255, 0, 102, 0.5);
+  transition: transform 0.4s ease;
+}
+
+.mainImage img:hover {
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Floating Hearts */
+.heart {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(255,0,100,0.7);
+  transform: rotate(45deg);
+  animation: float 8s infinite ease-in;
+}
+
+.heart:before,
+.heart:after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: rgba(255,0,100,0.7);
+  border-radius: 50%;
+  position: absolute;
+}
+
+.heart:before { top: -4px; left: 0; }
+.heart:after { left: -4px; top: 0; }
+
+@keyframes float {
+  0% { transform: translateY(100vh) rotate(45deg); opacity: 1; }
+  100% { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="entry">
+  <h1>For the most beautiful chapter of my life… 🤍</h1>
+  <button id="enterBtn">Click to Enter ❤️</button>
+</div>
+
+<div class="container" id="mainContent">
+  <h1 class="topNames">Supy 💕 Ramy</h1>
+  <h2>Happy Valentine's Day ❤️</h2>
+  <p>Since 26 September 2024, my world has been softer, warmer, and brighter.</p>
+
+  <div class="mainImage">
+    <img src="IMG_3944.JPG" alt="Our Memory">
+  </div>
+
+  <div id="counter"></div>
+
+  <p>Forever & Always 🤍</p>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="Mundhinam_ringtone_(Fringster.com).mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.getElementById("enterBtn").onclick = function() {
+  document.getElementById("entry").style.display = "none";
+  document.getElementById("mainContent").style.opacity = "1";
+  document.getElementById("bgMusic").play();
+};
+
+function updateCounter() {
+  const startDate = new Date(2024, 8, 26);
+  const now = new Date();
+
+  let years = now.getFullYear() - startDate.getFullYear();
+  let months = now.getMonth() - startDate.getMonth();
+  let days = now.getDate() - startDate.getDate();
+
+  if (days < 0) {
+    months--;
+    const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+    days += prevMonth.getDate();
+  }
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  document.getElementById("counter").innerHTML =
+    `We have been together for ❤️ ${years} year${years !== 1 ? 's' : ''}, 
+     ${months} month${months !== 1 ? 's' : ''}, 
+     ${days} day${days !== 1 ? 's' : ''}`;
+}
+
+updateCounter();
+setInterval(updateCounter, 1000);
+
+for (let i = 0; i < 20; i++) {
+  let heart = document.createElement("div");
+  heart.className = "heart";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (5 + Math.random() * 5) + "s";
+  document.body.appendChild(heart);
+}
+</script>
+
+</body>
+</html>
